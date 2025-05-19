@@ -1,4 +1,4 @@
-Step:1 Write a Script to Monitor SVN Copy Time ##
+# Step:1 Write a Script to Monitor SVN Copy Time ##
 
 #!/bin/bash
 
@@ -34,5 +34,8 @@ echo "Sending data to Zabbix: Duration = $DURATION"
 #zabbix_sender -z "$ZBX_SERVER" -s "$ZBX_HOST" -k "$KEY" -o "$DURATION"
 /usr/local/bin/zabbix_sender -z "$ZBX_SERVER" -s "$ZBX_HOST" -k "$KEY" -o "$DURATION"
 
-##
+# Step:2 Create Zabbix Trapper Item ##
+In Zabbix, define a trapper item for each location (e.g., svn.copy.latency.nj, svn.copy.latency.va).
+Set it up to receive status via zabbix_sender.
+
 
