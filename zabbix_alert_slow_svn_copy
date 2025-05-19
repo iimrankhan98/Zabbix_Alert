@@ -1,3 +1,5 @@
+Step:1 Write a Script to Monitor SVN Copy Time ##
+
 #!/bin/bash
 
 SVN_URL="https://projects.corp.1010data.com/svn/charles/tenable"
@@ -31,4 +33,6 @@ rm -rf "$TMP_DIR"
 echo "Sending data to Zabbix: Duration = $DURATION"
 #zabbix_sender -z "$ZBX_SERVER" -s "$ZBX_HOST" -k "$KEY" -o "$DURATION"
 /usr/local/bin/zabbix_sender -z "$ZBX_SERVER" -s "$ZBX_HOST" -k "$KEY" -o "$DURATION"
+
+##
 
