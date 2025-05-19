@@ -1,1 +1,34 @@
+#!/bin/bash
+
+SVN_URL="https://projects.corp.1010data.com/svn/charles/tenable"
+TMP_DIR="$(pwd)/svn_clone_latency_temp"
+ZBX_SERVER="localhost"
+ZBX_HOST="vasysdev085"
+KEY="svn.clone.latency.check"
+
+echo "Using TMP_DIR: $TMP_DIR"
+
+mkdir -p "$TMP_DIR"
+START=$(date +%s)
+
+echo "Running SVN checkout..."
+svn checkout --non-interactive --trust-server-cert "$SVN_URL" "$TMP_DIR"
+EXIT_CODE=$?
+
+END=$(date +%s)
+DURATION=$((END - START))
+
+if [ "$EXIT_CODE" -eq 0 ]; then
+  echo "SVN checkout successful."
+else
+  echo "SVN checkout failed with code $EXIT_CODE."
+  DURATION=-1
+fi
+
+echo "Cleaning up..."
+rm -rf "$TMP_DIR"
+
+echo "Sending data to Zabbix: Duration = $DURATION"
+#zabbix_sender -z "$ZBX_SERVER" -s "$ZBX_HOST" -k "$KEY" -o "$DURATION"
+/usr/local/bin/zabbix_sender -z "$ZBX_SERVER" -s "$ZBX_HOST" -k "$KEY" -o "$DURATION"
 
