@@ -38,4 +38,16 @@ echo "Sending data to Zabbix: Duration = $DURATION"
 In Zabbix, define a trapper item for each location (e.g., svn.copy.latency.nj, svn.copy.latency.va).
 Set it up to receive status via zabbix_sender.
 
+# Step:3 Automate with Cronjob ##
+*/15 * * * * /home/zabbix/bin/svn_clone_latency_check/svn_latency_check.sh >> /var/log/svn_latency_check.log 2>&1
+
+# Step:4 Zabbix Trigger Expression ##
+Create Trigger
+Name: SVN latency is high or failed (nj085)
+Severity: Average
+Expression:
+{nj085:svn.clone.latency.check.last()} = -1 or {nj085:svn.clone.latency.check.last()} > 20
+Click Add
+
+
 
