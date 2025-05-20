@@ -53,4 +53,36 @@ Click Add
 # Step:4 Automate with Cronjob ##
 */15 * * * * /home/zabbix/bin/svn_clone_latency_check/svn_latency_check.sh >> /var/log/svn_latency_check.log 2>&1
 
+Step:5 Email Media Type Setup (If not configure)
+Admin Panel → Administration > Media types
+Type: Email
+SMTP server: 127.0.0.1
+Port: 25
+SMTP helo: 1010data.com
+SMTP email: zabbix@1010data.com
+Connection security: None (if internal relay)
+Authentication: None (if not required)
+Enabled: ✅
 
+Step:6 User Configuration
+Go to Administration > Users
+Add/update user (e.g., Imran Khan):
+  Add Media Type: Email
+	Set email address and enable notifications for severity levels
+
+Step:7 Action Creation
+Name: SVN clone latency
+Conditions:
+	Trigger name contains: SVN latency
+	Host = nj085
+
+Operations:
+	Operation Type: Send message
+	Send to Users: Imran Khan
+	Send only to: Email
+	Use Default Message: ✅
+
+Summary:
+Zabbix alert for monitoring SVN clone latency on nj085 is fully operational, notifying the concerned user if:
+Clone fails (latency = -1)
+Clone takes more than 15 seconds
