@@ -44,7 +44,7 @@ Status: Enabled
 
 # Step:3 Zabbix Trigger Expression ##
 Create Trigger
-Name: SVN latency is high or failed (nj085)
+Name: SVN latency status check (vasysdev085) or SVN latency is high or failed (nj085)
 Severity: Average
 Expression:
 {nj085:svn.clone.latency.check.last()} = -1 or {nj085:svn.clone.latency.check.last()} > 20
