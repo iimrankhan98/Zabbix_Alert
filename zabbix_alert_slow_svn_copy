@@ -72,9 +72,9 @@ Add/update user (e.g., Imran Khan):
 	Set email address and enable notifications for severity levels
 
 Step:7 Action Creation
-Name: SVN clone latency
+Name: Alert Email SVN Clone Latency Status
 Conditions:
-	Trigger name contains: SVN latency
+	Trigger name contains: SVN Clone Latency Status
 	Host = nj085
 
 Operations:
