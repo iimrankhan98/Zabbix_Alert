@@ -36,6 +36,7 @@ echo "Sending data to Zabbix: Duration = $DURATION"
 
 # Step:2 Zabbix Item Creation (Zabbix Trapper) ##
 Host: nj085
+Name: SVN_Clone_Latency_Check
 Item Key: svn.clone.latency.check
 Type: Zabbix trapper
 Type of information: Numeric (float)
